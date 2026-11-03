@@ -90,6 +90,8 @@ header { display: flex; align-items: center; justify-content: space-between; gap
 .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; display: flex; flex-direction: column; min-width: 0; overflow: hidden; }
 .art { background: color-mix(in srgb, var(--c) 14%, var(--surface)); display: grid; place-items: center; padding: 22px 0 14px; position: relative; }
 .art svg { width: 62%; max-width: 160px; height: auto; }
+.art { padding: 22px 0 14px; }
+.art .photo { width: 100%; max-width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; display: block; margin: -22px 0 -14px; }
 .badge { position: absolute; top: 10px; left: 10px; background: var(--tag); color: var(--tag-ink); font: 500 .68rem var(--font-mono); text-transform: uppercase; letter-spacing: .06em; padding: 3px 8px; border-radius: 4px; }
 .info { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
 .info h3 { font-size: 1.2rem; letter-spacing: -0.01em; }
@@ -184,7 +186,7 @@ footer { margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--line);
 <script>
 var CURRENCY = "$";
 var PRODUCTS = [
-  { id: "trail28",  name: "Trail 28",         kind: "backpack", cabin: false, color: "#0f6b5c", price: 54,  vol: "28 L", kg: 0.9, extra: "Rain cover" },
+  { id: "trail28",  name: "Trail 28",         kind: "backpack", cabin: false, color: "#0f6b5c", price: 54,  vol: "28 L", kg: 0.9, extra: "Rain cover", img: "" },
   { id: "city20",   name: "City Daypack 20",  kind: "backpack", cabin: false, color: "#c2603a", price: 39,  vol: "20 L", kg: 0.6, extra: "Water-resistant" },
   { id: "laptop25", name: "Commuter 25",      kind: "backpack", cabin: false, color: "#2f5d9e", price: 47,  vol: "25 L", kg: 0.8, extra: '15.6" laptop sleeve' },
   { id: "exp55",    name: "Expedition 55",    kind: "backpack", cabin: false, color: "#6b4f2a", price: 98,  vol: "55 L", kg: 1.7, extra: "Hip belt" },
@@ -238,7 +240,7 @@ function renderGrid() {
   });
   document.getElementById("grid").innerHTML = list.map(function (p) {
     return '<article class="card" style="--c:' + p.color + '">' +
-      '<div class="art">' + (p.cabin ? '<span class="badge">Cabin size</span>' : '') + bagSvg(p.kind) + '</div>' +
+      '<div class="art">' + (p.cabin ? '<span class="badge">Cabin size</span>' : '') + (p.img ? '<img class="photo" src="' + p.img + '" alt="' + p.name + '">' : bagSvg(p.kind)) + '</div>' +
       '<div class="info"><h3>' + p.name + '</h3>' +
       '<ul class="specs"><li>' + p.vol + '</li><li>' + p.kg + ' kg</li><li>' + p.extra + '</li></ul>' +
       '<div class="buy"><span class="price">' + money(p.price) + '</span>' +
